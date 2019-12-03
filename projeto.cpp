@@ -407,14 +407,14 @@ bool torricelli(double &t_result) {
     int unknownPosition = -1;
     
     try { 
-        iVValue = stod(initialVelocity);
+        fVValue = stod(finalVelocity);
     }
     catch(invalid_argument &ia) { 
         unknownPosition = 1;
         ++unknownCount;
     }
     try { 
-        fVValue = stod(finalVelocity);
+        iVValue = stod(initialVelocity);
     }
     catch(invalid_argument &ia) { 
         unknownPosition = 2;
@@ -632,15 +632,15 @@ int main() {
     cout << "AngryduckCalculator >(*)\n";
     writeMenu();
     cout << "Option : ";
-    char option;
+    int option;
     cin >> option;
     cout << endl;  
     double result = 0;
     //t_result is passed by reference, its value will be modified by any function called
     //every function will return false if the user didn't choose an unknown, however it won't stop the execution 
-    while(option != '0') { 
+    while(option != 0 and (option >=1 or option <= 9)) { 
         switch(option) { 
-            case '1':
+            case 1:
                 if(pythagoreanTheorem(result)) {
                     cout << "Result = " << result << endl;
                 }
@@ -648,7 +648,7 @@ int main() {
                     cout << "ERROR: Invalid parameters, please try again\n";
                 }
                 break;
-            case '2':
+            case 2:
                 if(gravitation(result)) { 
                     cout << "Result = " << result << endl;
                 }
@@ -656,7 +656,7 @@ int main() {
                     cout << "ERROR: Invalid parameters, please try again\n";
                 }
                 break;
-            case '3':
+            case 3:
                 if(relativity(result)) { 
                     cout << "Result = " << result << endl;
                 }
@@ -664,7 +664,7 @@ int main() {
                     cout << "ERROR: Invalid parameters, please try again\n";
                 }
                 break;
-            case '4': {
+            case 4: {
                 //we might need bhaskara for this one 
                 //so we need x1 and x2 for the roots of delta 
                 bool bhaskara = false;
@@ -685,7 +685,7 @@ int main() {
                 }
             }
                 break;
-            case '5':
+            case 5:
                 if(clapeyron(result)) { 
                     cout << "Result = " << result << endl;
                 }
@@ -693,7 +693,7 @@ int main() {
                     cout << "ERROR: Invalid parameters, please try again\n";
                 }
                 break;
-            case '6':
+            case 6:
                 if(torricelli(result)) { 
                     cout << "Result = " << result << endl;
                 }
@@ -701,7 +701,7 @@ int main() {
                     cout << "ERROR: Invalid parameters, please try again\n";
                 }
                 break;
-            case '7':
+            case 7:
                 if(gauss(result)) { 
                     cout << "Result = " << result << endl;
                 }
@@ -709,7 +709,7 @@ int main() {
                     cout << "ERROR: Invalid parameters, please try again\n";
                 }
                 break;
-            case '8':
+            case 8:
                 if(force(result)) { 
                     cout << "Result = " << result << endl;
                 }
@@ -717,8 +717,12 @@ int main() {
                     cout << "ERROR: Invalid parameters, please try again\n";
                 }
                 break;
-            case '9':
+            case 9:
                 writeMenu();
+                break;
+                
+            default:
+                cout<<"ERROR: Invalid option!\n";
                 break;
         }
         cout << "Option: ";
